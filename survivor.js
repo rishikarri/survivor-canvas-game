@@ -11,7 +11,8 @@ canvas.width = 512;
 canvas.height = 480;
 
 // Add canvas to the body of the document
-document.body.appendChild(canvas);
+// document.body.appendChild(canvas);
+document.getElementById("middle-section").appendChild(canvas);
 
 var backgroundImage = new Image(); 
 backgroundImage.src = "Images/background.png";
@@ -204,8 +205,8 @@ function shoot(){
 	if(32 in keysPressed){
 		//shooting prevents arrow from moving with character
 		shooting = true;
-		// if the spacebar is hit, shoot the arrow 150 pixels right
-		arrowLocation.destinationX = arrowLocation.x + 150; 
+		// if the spacebar is hit, shoot the arrow 50 pixels right, user can hold it to make it go farther
+		arrowLocation.destinationX = arrowLocation.x + 50; 
 	}
 
 	// if the arrow is within 10 pixels of its destination stop it

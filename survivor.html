@@ -11,23 +11,39 @@
 
 	<!-- This will also contain the buttons to start, stop and pause the game -->
 	
-	<div>
+	<div id="game-wrapper">
 		<div id="top-section">
-			<h2 id="scoreKeeper">Score: 0</h2>
-			<h2 id="highScoreKeeper">High Score: 0</h2>
-			<h2 id="goldCollected">Gold: 0</h2>
-			<h2 id="health">Health: 20</h2>
+			<div id="game-stats">
+				<h2 id="scoreKeeper">Score: 0</h2>
+				<h2 id="highScoreKeeper">High Score: 0</h2>
+				<!-- <div id="treasure-chest">
+					<img src="Images/treasure-chest-2.png">
 
-			<button onclick="startGame()">Start a New Game</button>
-			<button onclick="stopGame()">Stop Game</button>
-			<button onclick="resumeGame()">Resume Game</button>
-			<button onclick="newPlayer()">New Player</button>
-			<!-- Come back to returning player later -->
-			<button onclick="newPlayer()">Returning Player</button>
+				</div> -->
+				<p id="gold-collected">Gold: 0</p>	
+				
+				<p id="health">Health: 20</p>
+			</div>
+
+			<div id="game-play-buttons">
+				<button onclick="startGame()">Start a New Game</button>
+				<button onclick="stopGame()">Stop Game</button>
+				<button onclick="resumeGame()">Resume Game</button>
+				<button onclick="newPlayer()">New Player</button>
+				<!-- Come back to returning player later -->
+				<button onclick="newPlayer()">Returning Player</button>
+			</div>
+
+			<div id="text-section">
+				<h2 id="textDisplay">&nbsp;</h2>
+			</div>
 		</div>
 
+		
+
+
 		<div id="middle-section">
-			<h2 id="textDisplay"></h2>
+		<!-- holds the canvas  -->
 		</div>
 	</div>
 
