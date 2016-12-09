@@ -168,8 +168,14 @@ function collisionDetection(){
 		goblinLocation.x = Math.random() * 440 + 40; 
 		goblinLocation.y = Math.random() * 400 + 20; 
 		healthPoints--;
-		document.getElementById("health").innerHTML = "Health: " + healthPoints; 
-		
+		document.getElementById("health").innerHTML = "Health: " + healthPoints; 	
+	}
+	//if arrow hits goblin, goblin slows down
+	if(
+		Math.abs(arrowLocation.x - goblinLocation.x) < 15
+		&& Math.abs(arrowLocation.y - goblinLocation.y) < 15 
+	){
+		goblinSpeedModifier = .3;
 	}
 }
 var shooting = false;
@@ -184,11 +190,7 @@ function shoot(){
 
 	// if the arrow is within 10 pixels of its destination stop it
 	if(Math.abs(arrowLocation.x - arrowLocation.destinationX) < 10){
-		// arrowLocation.x = robinHoodLocation.x + 20;
-		// arrowLocation.y = robinHoodLocation.y + 4; 
 		stopShooting();
-		console.log("HI")
-		// console.log(arrowLocation.x, arrowLocation.destinationX)
 	}else{
 		if(arrowLocation.x < arrowLocation.destinationX && shooting == true){
 			arrowLocation.x += 6;
