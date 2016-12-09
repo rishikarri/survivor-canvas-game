@@ -35,16 +35,25 @@ var goblinLocation = {
 	destinationY: 400
 }
 
-//create arrow object
+//create arrow objects
+
+
 var arrow = new Image(); 
 arrow.src = "Images/arrow-right.png";
 var arrowLocation = {
-	x: (robinHoodLocation.x + 20),
-	y: (robinHoodLocation.y + 4),
+	x: 220,
+	y: 204,
 	destinationX: 0,
 	destinationY: 0
 	
 }
+
+// var displayArrow = new Image();
+// displayArrow.src = "Images/arrow-right.png";
+// var displayArrowLocation = {
+// 	x: (robinHoodLocation.x + 20),
+// 	y: (robinHoodLocation.y + 4), 
+// }
 
 // HERO STAT Variables 
 var healthPoints = 20; 
@@ -76,32 +85,46 @@ addEventListener("keydown", function(event){
 //this should be in the update function -
 function moveRobinHood(){
 	// the entire if statement logic should go here which will be accessed by the update function
+	// only move arrow with robinhood if he is not shooting
+	
+
 	if(37 in keysPressed){
 		if (robinHoodLocation.x >= 32){
 			robinHoodLocation.x -= 7 * speedModifier;
+
+			if(!shooting){
 			arrowLocation.x -= 7 * speedModifier;
+			}
 		}
 	}
 	if (38 in keysPressed){
 		if (robinHoodLocation.y >= 30){
 			robinHoodLocation.y -= 7 * speedModifier;
+
+			if(!shooting){
 			arrowLocation.y -= 7 * speedModifier;
+			}
 		}
 	}
 	if (39 in keysPressed){
 		if (robinHoodLocation.x <= 440){
 			robinHoodLocation.x += 7 * speedModifier;
+
+			if(!shooting){
 			arrowLocation.x += 7 * speedModifier;
+			}
 		}
 	}
 	if (40 in keysPressed){
 		if (robinHoodLocation.y <= 405){
 			robinHoodLocation.y += 7 * speedModifier;
+			if(!shooting){
 			arrowLocation.y += 7 * speedModifier;
+			}
 		}
 	}
-	console.log(arrowLocation.x, arrowLocation.y);
-	console.log(robinHoodLocation.x, robinHoodLocation.y);
+	// console.log(arrowLocation.x, arrowLocation.y);
+	// console.log(robinHoodLocation.x, robinHoodLocation.y);
 	// console.log(arrowLocation.destinationX, arrowLocation.destinationY);
 }
 
@@ -149,18 +172,35 @@ function collisionDetection(){
 		
 	}
 }
-
+var shooting = false;
 function shoot(){
-	// if the spacebar is hit, shoot the arrow 100 pixels right
+	
 	if(32 in keysPressed){
-		arrowLocation.destinationX = arrowLocation.x + 100; 
-		arrowLocation.destinationY = arrowLocation.y; 
-		// console.log(arrowLocation.x, arrowLocation.destinationX)
-	}
-	if(arrowLocation.x < arrowLocation.destinationX){
-		arrowLocation.x += 2;
+		//shooting prevents arrow from moving with character
+		shooting = true;
+		// if the spacebar is hit, shoot the arrow 150 pixels right
+		arrowLocation.destinationX = arrowLocation.x + 150; 
 	}
 
+	// if the arrow is within 10 pixels of its destination stop it
+	if(Math.abs(arrowLocation.x - arrowLocation.destinationX) < 10){
+		// arrowLocation.x = robinHoodLocation.x + 20;
+		// arrowLocation.y = robinHoodLocation.y + 4; 
+		stopShooting();
+		console.log("HI")
+		// console.log(arrowLocation.x, arrowLocation.destinationX)
+	}else{
+		if(arrowLocation.x < arrowLocation.destinationX && shooting == true){
+			arrowLocation.x += 6;
+		}
+	}
+}
+
+// stops robinhood from shooting and gives him back his arrow
+function stopShooting(){
+	shooting = false;
+	arrowLocation.x = robinHoodLocation.x + 20;
+	arrowLocation.y = robinHoodLocation.y + 4; 
 }
 
 //Game status section
@@ -182,6 +222,7 @@ function draw() {
 	context.drawImage(backgroundImage, 0, 0);
 	context.drawImage(robinHood, robinHoodLocation.x, robinHoodLocation.y);
 	context.drawImage(goblin, goblinLocation.x, goblinLocation.y);
+	// context.drawImage(displayArrow, displayArrowLocation.x, displayArrowLocation.y);
 	context.drawImage(arrow, arrowLocation.x, arrowLocation.y);
 	requestAnimationFrame(draw);
 };
