@@ -41,8 +41,8 @@ arrow.src = "Images/arrow-right.png";
 var arrowLocation = {
 	x: (robinHoodLocation.x + 20),
 	y: (robinHoodLocation.y + 4),
-	destinationX: (robinHoodLocation.x + 20),
-	destinationY: (robinHoodLocation.y + 4)
+	destinationX: 0,
+	destinationY: 0
 	
 }
 
@@ -56,6 +56,7 @@ function update(){
 	collisionDetection();
 	shoot();
 	checkGameStatus();
+	
 
 }
 //MOVING SECTION 
@@ -99,6 +100,9 @@ function moveRobinHood(){
 			arrowLocation.y += 7 * speedModifier;
 		}
 	}
+	console.log(arrowLocation.x, arrowLocation.y);
+	console.log(robinHoodLocation.x, robinHoodLocation.y);
+	// console.log(arrowLocation.destinationX, arrowLocation.destinationY);
 }
 
 //create goblin movement 
@@ -151,9 +155,11 @@ function shoot(){
 	if(32 in keysPressed){
 		arrowLocation.destinationX = arrowLocation.x + 100; 
 		arrowLocation.destinationY = arrowLocation.y; 
-		console.log(arrowLocation.x, arrowLocation.destinationX)
+		// console.log(arrowLocation.x, arrowLocation.destinationX)
 	}
-	
+	if(arrowLocation.x < arrowLocation.destinationX){
+		arrowLocation.x += 2;
+	}
 
 }
 
