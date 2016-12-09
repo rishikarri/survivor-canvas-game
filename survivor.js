@@ -58,6 +58,9 @@ var arrowLocation = {
 // HERO STAT Variables 
 var healthPoints = 20; 
 
+//Goblin stats here 
+var goblinHealthPoints = 3;
+
 
 function update(){
 	moveRobinHood();
@@ -155,6 +158,16 @@ function moveGoblin(){
 	// console.log(goblinLocation.destinationX, goblinLocation.destinationY);
 }	
 
+function changeGoblinSpeed(){
+	if (goblinHealthPoints == 2) {
+		goblinSpeedModifier = .7; 
+	}
+	if (goblinHealthPoints == 1) {
+		goblinSpeedModifier = .2;
+	}
+	console.log(goblinHealthPoints, goblinSpeedModifier);
+}
+
 
 // collision detection section
 function collisionDetection(){
@@ -175,7 +188,14 @@ function collisionDetection(){
 		Math.abs(arrowLocation.x - goblinLocation.x) < 15
 		&& Math.abs(arrowLocation.y - goblinLocation.y) < 15 
 	){
-		goblinSpeedModifier = .3;
+		var goblinHit = true;
+		if (goblinHit == true){
+		goblinHealthPoints--;
+		goblinHit = false;
+		}
+		
+		changeGoblinSpeed();
+		//start here
 	}
 }
 var shooting = false;
